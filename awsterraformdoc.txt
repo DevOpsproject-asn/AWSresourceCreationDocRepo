@@ -1,0 +1,54 @@
+provider "aws" {
+  region = "us-east-1"  # Specify your desired AWS region
+}
+
+# Create an IAM group
+resource "aws_iam_group" "my_group" {
+  name = "my-group"
+}
+
+# Create an IAM user
+resource "aws_iam_user" "my_user" {
+  name = "my-user"
+}
+
+# Add the IAM user to the IAM group
+resource "aws_iam_group_membership" "my_membership" {
+  name = aws_iam_group.my_group.name
+  users = [aws_iam_user.my_user.name]
+}
+
+provider "aws" { 
+ region = "var.AWS_REGION"  
+}
+variable "usernames" {
+  type = list(string)
+  default = ["Avinna","Abhijeet"]
+}
+variable "AWS_REGION" { 
+ default = "ap-south-1" 
+}
+
+resource "aws_iam_user" "userlist" {
+  count = "${length(var.username)}"
+  name = "${element(var.username,count.index )}"
+}
+
+resource "aws_iam_group" "dev_group" {
+  name = "Developer"
+}
+
+resource "aws_iam_user_group_membership" "user_group_membership" {
+  count  = length(var.username)
+  user   = element(var.username, count.index[0])
+  groups = [aws_iam_group.dev_group.name, ]
+}
+
+resource "aws_iam_group" "grouplist" {
+    count = "${length(var.username)}"
+    name = "${element(var.username,count.index )}"
+}
+
+
+
+

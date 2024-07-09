@@ -1,0 +1,47 @@
+EKS role 
+-----------------
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": [
+                    "eks.amazonaws.com"
+                ]
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+
+------------------------------------
+EKS worker role
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "sts:AssumeRole"
+            ],
+            "Principal": {
+                "Service": [
+                    "ec2.amazonaws.com"
+                ]
+            }
+        }
+    ]
+}
+
+arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy
+arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly
+
+
+sudo install -o ubuntu -g ubuntu -m 0755 kubectl /usr/local/bin/kubectl
+
+Added new context arn:aws:eks:ap-south-1:681873453744:cluster/Demo_eks_cluster to /home/ubuntu/.kube/config
+
+
+

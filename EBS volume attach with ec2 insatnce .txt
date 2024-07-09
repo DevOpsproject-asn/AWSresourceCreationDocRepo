@@ -1,0 +1,30 @@
+EBS volume attach with EC2 instance :
+-----------------------------------------
+Console using EBS volume extended 
+-------------------------------------
+Create new volume and attach to ec2 instance
+
+then below command follow to extend the volume 
+    df -h 
+	lsblk
+	file -s /dev/xvdf
+	mkfs -t xfs /dev/xvdf
+	mkdir -p /apps/volume/new-volume
+	mount /dev/xvdf /apps/volume/new-volume
+	
+	sudo resize2fs /dev/nvme0n1p1
+	
+set permanently on fstab 
+   vi /etc/fstab
+   UUID=aebf131c-6957-451e-8d34-ec978d9581ae  /apps/volume/new-volume  xfs  defaults,nofail  0  2
+   
+  Resize for EBS volume 
+  ----------------------
+aws ec2 describe-instance-types --instance-type instance_type --query "InstanceTypes[].Hypervisor"
+sudo lsblk
+
+sudo xfs_growfs -d /
+sudo resize2fs /dev/xvda1 ( xen )
+
+sudo growpart /dev/nvme0n1 1 (Nitro )
+sudo resize2fs /dev/nvme0n1p1
