@@ -1,0 +1,37 @@
+AWS ELB ( Elastic Loadbancer) 
+-----------------------
+   ALB  ( Application LoadBalancer )
+   NLB  ( Network Loadbalancer )
+   GWLB ( Gateway loadbalancer )
+
+ALB 
+  Create #3 ec2 instance with ubuntu server 
+  Install apache2 package ( sudo apt install apache2 )
+  start the service (       sudo systemctl start apache2 )
+  Create index.html and add content 
+     mkdir -p /var/www/html/
+     sudo vi index.html
+        <html>
+         <head>
+          <title>My Website</title>
+         </head>
+        <body>
+         <h1>Hello, world!</h1>
+         <p>This is my first web page.</p>
+        </body>
+       </html>
+
+ Create a traget group 
+      TG types are 
+         Instances
+         Ip addresses
+         Lambda function
+         Application Load Balancer
+
+Http rule are 
+   Host header
+   path
+   Http header
+   Http request method
+   Query string
+   Source IP
